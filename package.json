@@ -1,0 +1,17 @@
+{
+  "name": "grunt-lasso",
+  "version": "1.0.0",
+  "description": "Grunt plugin for Lasso js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ajaykumar Prathap",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.2",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "lasso": "^3.1.4"
+  }
+}
