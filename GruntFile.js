@@ -19,7 +19,7 @@ module.exports = (grunt) => {
         lasso: {
             config: {
                 'plugins': [
-                    'lasso-less'
+
                 ],
                 'urlPrefix': '/build',
                 'outputDir': path.join(__dirname, 'build'),
