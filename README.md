@@ -16,15 +16,28 @@ npm install --save-dev grunt-lasso
 
 ```javascript
 
-grunt // to clean and check jshint
 grunt lasso // bundles and injects it in to html.
 
 ```
 
 ## Default lasso config:
 
+Provide targetHTML and dependecies in lassoOptions and provide lasso config details in Config as mentioned below.
+
 ```javascript
-           config: {
+           lasso: {
+
+            lassoOptions: {
+                 // js and css bundled file will be inserted inside this html
+                "srcHTML": path.join(__dirname, 'src/index.html'),
+                // Set of dependencies to add to the bundle
+                "dependencies": [
+                    "./src/app.js",
+                    "./src/app.less",
+                ],
+            },
+
+             config: {
                 'plugins': [
                    // you can provide array of plugins
                 ],
@@ -42,17 +55,42 @@ grunt lasso // bundles and injects it in to html.
                  // If "bundlingEnabled" is set to true then dependencies will be concatenated
                 // together into one or more bundles. If set to false then each dependency
                  // will be written to a separate file. (defaults to true)
-                'bundlingEnabled': true,
-                // Set of dependencies to add to the bundle
-                'dependencies':[
-                    "./src/css/style.css",
-                     "./src/js/index.js",
-                     "./src/component/app.js",
-                     "require-run: ./src/js/main"
-                 ],
-                 // js and css bundled file will be inserted inside this html
-                 'targetHTML':'./src/index.html'
+                'bundlingEnabled': true
                  }
+           }
 ```
 
-You can provide lasso.config file to replace the default config.
+## Sample GruntFile.js to be included.
+
+```javascript
+module.exports = function (grunt) {
+    const path = require('path');
+    grunt.initConfig({
+        lasso: {
+            lassoOptions: {
+                "srcHTML": path.join(__dirname, 'src/index.html'),
+                "dependencies": [
+                    "./src/main.js",
+                    ".src/style.less"
+                ],
+            },
+
+            config: {
+                'plugins': [
+                    'lasso-less'
+                ],
+                'urlPrefix': '/build',
+                'outputDir': path.join(__dirname, 'build'),
+                'fingerprintsEnabled': true,
+                'minify': false,
+                'resolveCssUrls': true,
+                'bundlingEnabled': true
+            }
+        }
+    })
+
+    // load the tasks
+    grunt.loadNpmTasks('grunt-lasso');
+};
+
+```
